@@ -3,6 +3,7 @@ package com.iit.imprimerie.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +57,7 @@ public class NiveauController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "l'objet est trouvée"),
 			@ApiResponse(code = 404, message = "aucun objet existe dans la base avec ce id"),
 			@ApiResponse(code = 500, message = "aucun objet existe dans la base de donnée avec ce id") })
-	@GetMapping("/Niveau/{id}")
+	@GetMapping(value="/Niveau/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Niveau getNiveau(@PathVariable int id) {
 		Niveau m = nivs.getNiveau(id);
 		return m;
@@ -64,7 +65,7 @@ public class NiveauController {
 
 	@ApiOperation(value = "renvoie la liste des objets", notes = "cette methode permet de renvoyer la liste des objet qui existe dans le base de donnée", responseContainer = "List<Niveau>")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "la liste des objet / une liste vide"), })
-	@GetMapping("/GetAllNiveau")
+	@GetMapping(value="/GetAllNiveau",produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Niveau> getAllNiveau() {
 		return nivs.getAllNiveau();
 	}

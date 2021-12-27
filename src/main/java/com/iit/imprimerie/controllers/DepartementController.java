@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,7 +64,7 @@ public class DepartementController {
 			@ApiResponse(code = 500,message = "aucun departement existe dans la base de donnée avec ce id" )
 			}
 			)
-	@GetMapping("/Departement/{id}")
+	@GetMapping(value="/Departement/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Optional<Departement> getDepartement(@PathVariable int id) {
 		Optional<Departement> departement = dps.getDepartement(id);
 		return departement;
@@ -71,7 +72,7 @@ public class DepartementController {
 
 	@ApiOperation(value = "renvoie la liste des departements", notes = "cette methode permet de renvoyer la liste des article qui existe dans le base de donnée", responseContainer = "List<Departement>")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "la liste des article / une liste vide"), })
-	@GetMapping("/GetAllDepartement")
+	@GetMapping(value="/GetAllDepartement",produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Departement> getAllDepartement() {
 		//throw new ApiRequestException("cannot get all departement");
 		 return dps.getAllDepartement();
